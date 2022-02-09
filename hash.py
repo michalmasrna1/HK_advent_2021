@@ -27,3 +27,15 @@ def my_hash(password: str) -> str:
         result_int ^= psswd_int
 
     return int_to_hex_string(result_int)
+
+
+def decode(hash_string: str, shorter: bool) -> str:
+    number = int(hash_string, base=16)
+    result_int = number ^ (number >> 4)
+    if shorter:
+        result_int ^= PADDING
+
+    return int_to_ascii(result_int)
+
+
+print(decode("8b2ef66957b373ca383d71baa35d682b", True))
